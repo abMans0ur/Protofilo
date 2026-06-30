@@ -5,6 +5,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abdelrahman Mansour — Backend Engineer</title>
+  <meta name="description"
+    content="Abdelrahman Mansour — Backend Engineer based in Giza, Egypt. Building scalable systems, secure APIs, and enterprise-grade backends with Java, Node.js, Laravel, and Spring Boot." />
+  <meta property="og:title" content="Abdelrahman Mansour — Backend Engineer" />
+  <meta property="og:description"
+    content="Backend Engineer building scalable systems, secure APIs, and enterprise-grade backends across fintech and enterprise environments." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Abdelrahman Mansour — Backend Engineer" />
+  <meta name="twitter:description"
+    content="Backend Engineer building scalable systems, secure APIs, and enterprise-grade backends across fintech and enterprise environments." />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230A0F1E'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='700' fill='%23C9A84C' text-anchor='middle'%3EAM%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -111,10 +123,6 @@
     .reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    .reveal-stagger.is-visible {
-      transition-delay: var(--reveal-delay, 0s);
     }
 
     /* ─── HERO ─── */
@@ -383,16 +391,6 @@
       overflow: hidden;
       background: var(--navy-mid);
       position: relative;
-    }
-
-    .project-thumb iframe {
-      width: 200%;
-      height: 200%;
-      transform: scale(0.5);
-      transform-origin: 0 0;
-      border: none;
-      pointer-events: none;
-      filter: brightness(0.9);
     }
 
     .project-thumb-fallback {
@@ -761,14 +759,70 @@
       color: var(--gold);
     }
 
+    /* ─── MOBILE NAV TOGGLE ─── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 101;
+    }
+
+    .nav-toggle span {
+      width: 22px;
+      height: 2px;
+      background: var(--off-white);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-toggle.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       nav {
         padding: 1rem 1.5rem;
       }
 
+      .nav-toggle {
+        display: flex;
+      }
+
       .nav-links {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 15, 30, 0.97);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        padding: 1.5rem;
+        transform: translateY(-130%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.35s ease, opacity 0.35s ease;
+      }
+
+      .nav-links.mobile-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
       }
 
       .hero {
@@ -797,13 +851,19 @@
   <!-- NAV -->
   <nav>
     <div class="nav-logo">AM</div>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#confidential">Confidential</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false"
+      aria-controls="navLinks">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -866,6 +926,7 @@
       <div class="skill-card">
         <div class="skill-category">Architecture</div>
         <div class="skill-tags">
+          <span class="skill-tag">Microservices</span>
           <span class="skill-tag">REST APIs</span>
           <span class="skill-tag">JWT Auth</span>
           <span class="skill-tag">System Design</span>
@@ -1271,6 +1332,17 @@
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
+        <div class="timeline-date">2020 – Present</div>
+        <div class="timeline-role">Freelance Backend Developer</div>
+        <div class="timeline-company">Independent</div>
+        <ul class="timeline-bullets">
+          <li>Delivered inventory systems, payment gateway integrations, and e-commerce platforms for clients alongside
+            full-time roles</li>
+          <li>Designed scalable backend architectures for diverse client industries</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
         <div class="timeline-date">2024 – 2025</div>
         <div class="timeline-role">Mid-Senior Backend Developer</div>
         <div class="timeline-company">Shahm4Tech</div>
@@ -1278,16 +1350,6 @@
           <li>Designed end-to-end backend systems for multiple client products</li>
           <li>Built RESTful APIs and implemented complex business logic</li>
           <li>Optimized database performance across PostgreSQL and MySQL</li>
-        </ul>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-date">2024 – 2025</div>
-        <div class="timeline-role">Freelance Backend Developer</div>
-        <div class="timeline-company">Independent</div>
-        <ul class="timeline-bullets">
-          <li>Delivered inventory systems, payment gateway integrations, and e-commerce platforms</li>
-          <li>Designed scalable backend architectures for diverse client industries</li>
         </ul>
       </div>
       <div class="timeline-item">
@@ -1350,7 +1412,7 @@
   <footer>
     <p>© <span id="year">2025</span> <span>Abdelrahman Mansour</span>. All rights reserved.</p>
     <div style="display:flex; align-items:center; gap:1.5rem;">
-      <p>Backend Engineer · <span>Cairo, Egypt</span></p>
+      <p>Backend Engineer · <span>Giza, Egypt</span></p>
     </div>
   </footer>
 
@@ -1380,6 +1442,61 @@
 
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     })();
+
+    // ── Active nav link highlighting on scroll ──
+    (function () {
+      const navLinks = document.querySelectorAll('.nav-links a');
+      const sections = Array.from(navLinks)
+        .map(link => document.querySelector(link.getAttribute('href')))
+        .filter(Boolean);
+
+      // Use a thin trigger band just below the fixed nav, rather than a
+      // percentage-of-section threshold — tall sections (Skills, Projects,
+      // Confidential, Experience) never reach a 30% overlap ratio, so only
+      // short sections like Contact were ever marked active.
+      const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const id = '#' + entry.target.id;
+          const link = document.querySelector('.nav-links a[href="' + id + '"]');
+          if (!link) return;
+          navLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        });
+      }, { threshold: 0, rootMargin: '-100px 0px -70% 0px' });
+
+      sections.forEach(sec => navObserver.observe(sec));
+    })();
+
+    // ── Mobile nav toggle ──
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const links = document.getElementById('navLinks');
+      if (!toggle || !links) return;
+
+      function closeMenu() {
+        toggle.classList.remove('open');
+        links.classList.remove('mobile-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = links.classList.toggle('mobile-open');
+        toggle.classList.toggle('open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      links.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!links.contains(e.target) && !toggle.contains(e.target)) {
+          closeMenu();
+        }
+      });
+    })();
+
     const yearSpan = document.getElementById('year');
     const currentYear = new Date().getFullYear();
     if (yearSpan) {
