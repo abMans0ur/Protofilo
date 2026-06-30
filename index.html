@@ -1,713 +1,1392 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Abdelrahman Mansour — Backend Engineer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdelrahman Mansour — Backend Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  :root {
-    --navy: #0A0F1E;
-    --navy-mid: #1E2A45;
-    --gold: #C9A84C;
-    --gold-light: #E2C97A;
-    --off-white: #F0EDE6;
-    --muted: #8892A4;
-    --card-bg: #111827;
-  }
+    :root {
+      --navy: #0A0F1E;
+      --navy-mid: #1E2A45;
+      --gold: #C9A84C;
+      --gold-light: #E2C97A;
+      --off-white: #F0EDE6;
+      --muted: #8892A4;
+      --card-bg: #111827;
+    }
 
-  html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  body {
-    background: var(--navy);
-    color: var(--off-white);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+    body {
+      background: var(--navy);
+      color: var(--off-white);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-  /* ─── NAV ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.2rem 4rem;
-    background: rgba(10,15,30,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201,168,76,0.12);
-  }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem; font-weight: 700;
-    color: var(--gold); letter-spacing: 0.02em;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    color: var(--muted); text-decoration: none;
-    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(10, 15, 30, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+    }
 
-  /* ─── HERO ─── */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    position: relative; padding: 6rem 4rem 4rem;
-    overflow: hidden;
-  }
-  .hero-dots {
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(201,168,76,0.12) 1px, transparent 1px);
-    background-size: 36px 36px;
-    animation: dotsShift 20s linear infinite;
-  }
-  @keyframes dotsShift {
-    0% { background-position: 0 0; }
-    100% { background-position: 72px 72px; }
-  }
-  .hero-glow {
-    position: absolute; width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
-    top: 50%; left: 50%; transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-  .hero-content { position: relative; z-index: 1; max-width: 900px; }
-  .hero-eyebrow {
-    display: inline-block;
-    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--gold);
-    border: 1px solid rgba(201,168,76,0.35);
-    padding: 0.35rem 1rem; border-radius: 2px;
-    margin-bottom: 2rem;
-    animation: fadeUp 0.8s ease both;
-  }
-  .hero-name {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 900; line-height: 1.0;
-    color: var(--off-white);
-    margin-bottom: 1.5rem;
-    animation: fadeUp 0.8s 0.15s ease both;
-  }
-  .hero-name span { color: var(--gold); }
-  .hero-tagline {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: var(--muted); font-weight: 300;
-    max-width: 560px; line-height: 1.7;
-    margin-bottom: 3rem;
-    animation: fadeUp 0.8s 0.3s ease both;
-  }
-  .hero-ctas {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-    animation: fadeUp 0.8s 0.45s ease both;
-  }
-  .btn-primary {
-    background: var(--gold); color: var(--navy);
-    padding: 0.85rem 2rem; border: none; border-radius: 2px;
-    font-family: 'Inter', sans-serif; font-weight: 600;
-    font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
-    cursor: pointer; text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .btn-ghost {
-    background: transparent; color: var(--off-white);
-    padding: 0.85rem 2rem;
-    border: 1px solid rgba(240,237,230,0.25); border-radius: 2px;
-    font-family: 'Inter', sans-serif; font-weight: 500;
-    font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase;
-    cursor: pointer; text-decoration: none;
-    transition: border-color 0.2s, color 0.2s, transform 0.15s;
-  }
-  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+    }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
 
-  /* ─── SECTION BASE ─── */
-  section { padding: 7rem 4rem; }
-  .section-label {
-    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 1rem;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700; line-height: 1.15;
-    color: var(--off-white);
-    margin-bottom: 1rem;
-  }
-  .section-desc {
-    color: var(--muted); font-size: 1rem; max-width: 520px; margin-bottom: 4rem;
-  }
-  .divider {
-    width: 48px; height: 2px; background: var(--gold);
-    margin-bottom: 1.5rem;
-  }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
 
-  /* ─── SKILLS ─── */
-  #skills { background: var(--navy-mid); }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem; margin-top: 3rem;
-  }
-  .skill-card {
-    background: rgba(10,15,30,0.7);
-    border: 1px solid rgba(201,168,76,0.12);
-    border-radius: 4px; padding: 1.5rem 1.75rem;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .skill-card:hover { border-color: rgba(201,168,76,0.45); transform: translateY(-3px); }
-  .skill-category {
-    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .skill-tag {
-    font-size: 0.8rem; color: var(--muted);
-    background: rgba(255,255,255,0.04);
-    padding: 0.25rem 0.65rem; border-radius: 2px;
-  }
+    .nav-links a:hover {
+      color: var(--gold);
+    }
 
-  /* ─── PROJECTS ─── */
-  #projects { background: var(--navy); }
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 2rem; margin-top: 3rem;
-  }
-  .project-card {
-    background: var(--card-bg);
-    border: 1px solid rgba(201,168,76,0.08);
-    border-radius: 6px; overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    display: flex; flex-direction: column;
-    position: relative;
-  }
-  .project-card:hover {
-    border-color: rgba(201,168,76,0.4);
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-  }
-  .project-thumb {
-    width: 100%; height: 200px; overflow: hidden;
-    background: var(--navy-mid);
-    position: relative;
-  }
-  .project-thumb iframe {
-    width: 200%; height: 200%;
-    transform: scale(0.5);
-    transform-origin: 0 0;
-    border: none;
-    pointer-events: none;
-    filter: brightness(0.9);
-  }
-  .project-thumb-fallback {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 0.75rem;
-    background: linear-gradient(135deg, var(--navy-mid) 0%, #0d1628 100%);
-  }
-  .project-thumb-fallback .site-icon {
-    font-size: 2.5rem; opacity: 0.7;
-  }
-  .project-thumb-fallback .site-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem; color: var(--gold); opacity: 0.8;
-  }
-  .project-thumb-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, transparent 40%, rgba(17,24,39,0.95) 100%);
-    pointer-events: none;
-  }
-  .project-body { padding: 1.5rem 1.75rem 2rem; flex: 1; display: flex; flex-direction: column; }
-  .project-industry {
-    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 0.5rem;
-  }
-  .project-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem; font-weight: 700;
-    color: var(--off-white); margin-bottom: 0.6rem;
-    line-height: 1.3;
-  }
-  .project-desc {
-    font-size: 0.85rem; color: var(--muted);
-    line-height: 1.65; flex: 1; margin-bottom: 1.25rem;
-  }
-  .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
-  .tech-badge {
-    font-size: 0.72rem; color: var(--gold);
-    background: rgba(201,168,76,0.1);
-    border: 1px solid rgba(201,168,76,0.2);
-    padding: 0.2rem 0.55rem; border-radius: 2px;
-    font-weight: 500;
-  }
-  .project-link {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--gold);
-    text-decoration: none;
-    transition: gap 0.2s;
-  }
-  .project-link:hover { gap: 0.75rem; }
-  .project-link svg { width: 14px; height: 14px; }
+    .nav-links a.active {
+      color: var(--gold);
+      position: relative;
+    }
 
-  /* ─── EXPERIENCE ─── */
-  #experience { background: var(--navy-mid); }
-  .timeline { position: relative; padding-left: 2rem; margin-top: 3rem; }
-  .timeline::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 1px; background: rgba(201,168,76,0.2);
-  }
-  .timeline-item { position: relative; padding-bottom: 3rem; }
-  .timeline-item:last-child { padding-bottom: 0; }
-  .timeline-dot {
-    position: absolute; left: -2rem; top: 0.35rem;
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--gold);
-    transform: translateX(-50%);
-    box-shadow: 0 0 0 4px rgba(201,168,76,0.15);
-  }
-  .timeline-date {
-    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 0.4rem;
-  }
-  .timeline-role {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem; font-weight: 700;
-    color: var(--off-white); margin-bottom: 0.2rem;
-  }
-  .timeline-company {
-    font-size: 0.85rem; color: var(--muted); margin-bottom: 0.75rem;
-  }
-  .timeline-bullets { list-style: none; }
-  .timeline-bullets li {
-    font-size: 0.875rem; color: var(--muted);
-    padding: 0.25rem 0; padding-left: 1.1rem;
-    position: relative;
-  }
-  .timeline-bullets li::before {
-    content: '—'; position: absolute; left: 0;
-    color: var(--gold); font-size: 0.7rem; top: 0.3rem;
-  }
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 1px;
+    }
 
-  /* ─── CONTACT ─── */
-  #contact { background: var(--navy); text-align: center; padding-bottom: 5rem; }
-  #contact .section-desc { margin: 0 auto 2.5rem; }
-  .contact-info {
-    display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
-    margin-top: 2rem;
-  }
-  .contact-item {
-    display: flex; align-items: center; gap: 0.6rem;
-    font-size: 0.9rem; color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .contact-item:hover { color: var(--gold); }
-  .contact-item svg { width: 16px; height: 16px; color: var(--gold); flex-shrink: 0; }
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
 
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--navy-mid);
-    border-top: 1px solid rgba(201,168,76,0.1);
-    padding: 2rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1rem;
-  }
-  footer p { font-size: 0.8rem; color: var(--muted); }
-  footer span { color: var(--gold); }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { padding: 5rem 1.5rem 3rem; }
-    section { padding: 5rem 1.5rem; }
-    .projects-grid { grid-template-columns: 1fr; }
-    footer { padding: 1.5rem; flex-direction: column; text-align: center; }
-  }
-</style>
+    .reveal-stagger.is-visible {
+      transition-delay: var(--reveal-delay, 0s);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 6rem 4rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(201, 168, 76, 0.12) 1px, transparent 1px);
+      background-size: 36px 36px;
+      animation: dotsShift 20s linear infinite;
+    }
+
+    @keyframes dotsShift {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 72px 72px;
+      }
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.07) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      color: var(--off-white);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .hero-name span {
+      color: var(--gold);
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 0.85rem 2rem;
+      border: none;
+      border-radius: 2px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--off-white);
+      padding: 0.85rem 2rem;
+      border: 1px solid rgba(240, 237, 230, 0.25);
+      border-radius: 2px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ─── SECTION BASE ─── */
+    section {
+      padding: 7rem 4rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--off-white);
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 520px;
+      margin-bottom: 4rem;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── SKILLS ─── */
+    #skills {
+      background: var(--navy-mid);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .skill-card {
+      background: rgba(10, 15, 30, 0.7);
+      border: 1px solid rgba(201, 168, 76, 0.12);
+      border-radius: 4px;
+      padding: 1.5rem 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(201, 168, 76, 0.45);
+      transform: translateY(-3px);
+    }
+
+    .skill-category {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 0.25rem 0.65rem;
+      border-radius: 2px;
+    }
+
+    /* ─── PROJECTS ─── */
+    #projects {
+      background: var(--navy);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(201, 168, 76, 0.08);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: rgba(201, 168, 76, 0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .project-thumb {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: var(--navy-mid);
+      position: relative;
+    }
+
+    .project-thumb iframe {
+      width: 200%;
+      height: 200%;
+      transform: scale(0.5);
+      transform-origin: 0 0;
+      border: none;
+      pointer-events: none;
+      filter: brightness(0.9);
+    }
+
+    .project-thumb-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, var(--navy-mid) 0%, #0d1628 100%);
+    }
+
+    .project-thumb-fallback .site-icon {
+      font-size: 2.5rem;
+      opacity: 0.7;
+    }
+
+    .project-thumb-fallback .site-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      opacity: 0.8;
+    }
+
+    .project-thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(17, 24, 39, 0.95) 100%);
+      pointer-events: none;
+    }
+
+    .project-body {
+      padding: 1.5rem 1.75rem 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-industry {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--off-white);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tech-badge {
+      font-size: 0.72rem;
+      color: var(--gold);
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+
+    .project-link:hover {
+      gap: 0.75rem;
+    }
+
+    .project-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ─── FLAGSHIP CARD (premium NDA showcase) ─── */
+    .project-card.flagship {
+      border-color: rgba(201, 168, 76, 0.3);
+    }
+
+    .project-card.flagship::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 6px;
+      padding: 1px;
+      background: linear-gradient(120deg, rgba(201, 168, 76, 0.7), rgba(201, 168, 76, 0) 35%, rgba(201, 168, 76, 0) 65%, rgba(201, 168, 76, 0.7) 100%);
+      background-size: 220% 220%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: borderShimmer 5s linear infinite;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    @keyframes borderShimmer {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 220% 50%;
+      }
+    }
+
+    /* ─── TRANSACTION WIDGET ─── */
+    .txn-widget {
+      width: 100%;
+      height: 100%;
+      padding: 1.1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--navy-mid) 0%, #0d1628 100%);
+    }
+
+    .txn-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(201, 168, 76, 0.18);
+      border-radius: 5px;
+      padding: 0.5rem 0.8rem;
+      opacity: 0;
+      transform: translateX(-16px);
+      animation: txnSlide 0.6s ease forwards;
+    }
+
+    .txn-row:nth-child(1) {
+      animation-delay: 0.15s;
+    }
+
+    .txn-row:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .txn-row:nth-child(3) {
+      animation-delay: 0.65s;
+    }
+
+    .txn-row:nth-child(4) {
+      animation-delay: 0.9s;
+    }
+
+    @keyframes txnSlide {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .txn-gateway {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--off-white);
+    }
+
+    .txn-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ADE80;
+      animation: txnPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes txnPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5);
+      }
+
+      70% {
+        box-shadow: 0 0 0 6px rgba(74, 222, 128, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+      }
+    }
+
+    .txn-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    /* ─── EXPERIENCE ─── */
+    #experience {
+      background: var(--navy-mid);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin-top: 3rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(201, 168, 76, 0.2);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 3rem;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2rem;
+      top: 0.35rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      transform: translateX(-50%);
+      box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.15);
+    }
+
+    .timeline-date {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--off-white);
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-company {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-bullets {
+      list-style: none;
+    }
+
+    .timeline-bullets li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      padding: 0.25rem 0;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .timeline-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.7rem;
+      top: 0.3rem;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: var(--navy);
+      text-align: center;
+      padding-bottom: 5rem;
+    }
+
+    #contact .section-desc {
+      margin: 0 auto 2.5rem;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-item:hover {
+      color: var(--gold);
+    }
+
+    .contact-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(201, 168, 76, 0.1);
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer span {
+      color: var(--gold);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 5rem 1.5rem 3rem;
+      }
+
+      section {
+        padding: 5rem 1.5rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        padding: 1.5rem;
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">AM</div>
-  <ul class="nav-links">
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">AM</div>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#confidential">Confidential</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-dots"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Backend Engineer · Egypt</div>
-    <h1 class="hero-name">Abdelrahman<br /><span>Mansour</span></h1>
-    <p class="hero-tagline">Building scalable systems, secure APIs, and enterprise-grade backends — from fintech at Banque Misr to multi-client platforms across Egypt and beyond.</p>
-    <div class="hero-ctas">
-      <a href="#projects" class="btn-primary">View My Work</a>
-      <a href="#contact" class="btn-ghost">Get in Touch</a>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">What I Bring</div>
-  <div class="divider"></div>
-  <h2 class="section-title">Technical Skills</h2>
-  <p class="section-desc">A full-stack toolkit rooted in strong backend fundamentals, built across years of real-world production environments.</p>
-
-  <div class="skills-grid">
-    <div class="skill-card">
-      <div class="skill-category">Languages</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Java</span>
-        <span class="skill-tag">JavaScript</span>
-        <span class="skill-tag">PHP</span>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-dots"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Backend Engineer · Egypt</div>
+      <h1 class="hero-name">Abdelrahman<br /><span>Mansour</span></h1>
+      <p class="hero-tagline">Building scalable systems, secure APIs, and enterprise-grade backends — from fintech at
+        Banque Misr to multi-client platforms across Egypt and beyond.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-ghost">Get in Touch</a>
       </div>
     </div>
-    <div class="skill-card">
-      <div class="skill-category">Backend</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Spring Boot</span>
-        <span class="skill-tag">Node.js</span>
-        <span class="skill-tag">Laravel</span>
-        <span class="skill-tag">Microservices</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-category">Frontend</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Vue.js</span>
-        <span class="skill-tag">React.js</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-category">Databases</div>
-      <div class="skill-tags">
-        <span class="skill-tag">PostgreSQL</span>
-        <span class="skill-tag">MySQL</span>
-        <span class="skill-tag">Oracle</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-category">Architecture</div>
-      <div class="skill-tags">
-        <span class="skill-tag">REST APIs</span>
-        <span class="skill-tag">JWT Auth</span>
-        <span class="skill-tag">System Design</span>
-      </div>
-    </div>
-    <div class="skill-card">
-      <div class="skill-category">Tools</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Git</span>
-        <span class="skill-tag">Docker</span>
-        <span class="skill-tag">Postman</span>
-        <span class="skill-tag">WordPress</span>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">Delivered Work</div>
-  <div class="divider"></div>
-  <h2 class="section-title">Client Projects</h2>
-  <p class="section-desc">Live platforms built and shipped for clients across aviation, logistics, fashion, trade, and more.</p>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">What I Bring</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Technical Skills</h2>
+    <p class="section-desc">A full-stack toolkit rooted in strong backend fundamentals, built across years of real-world
+      production environments.</p>
 
-  <div class="projects-grid" id="projects-grid">
-
-    <!-- Swift Jet Aviation -->
-    <div class="project-card">
-      <div class="project-thumb">
-        <div class="project-thumb-fallback">
-          <div class="site-icon">✈️</div>
-          <div class="site-name">Swift Jet Aviation</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-category">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">PHP</span>
         </div>
-        <div class="project-thumb-overlay"></div>
       </div>
-      <div class="project-body">
-        <div class="project-industry">Aviation · VIP Services</div>
-        <div class="project-title">Swift Jet Aviation</div>
-        <p class="project-desc">A premium private jet charter platform offering helicopter services, cargo logistics, medevac support, and VIP terminal access. Built with a high-performance backend to handle real-time bookings and service requests.</p>
-        <div class="project-tech">
-          <span class="tech-badge">PHP / Laravel</span>
-          <span class="tech-badge">REST API</span>
-          <span class="tech-badge">MySQL</span>
-          <span class="tech-badge">WordPress</span>
+      <div class="skill-card">
+        <div class="skill-category">Backend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Laravel</span>
+          <span class="skill-tag">Microservices</span>
         </div>
-        <a href="https://swiftjetaviation.com/" target="_blank" rel="noopener" class="project-link">
-          Visit Site
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Frontend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Vue.js</span>
+          <span class="skill-tag">React.js</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">Oracle</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Architecture</div>
+        <div class="skill-tags">
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">JWT Auth</span>
+          <span class="skill-tag">System Design</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Postman</span>
+          <span class="skill-tag">WordPress</span>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Blink DS -->
-    <div class="project-card">
-      <div class="project-thumb">
-        <div class="project-thumb-fallback">
-          <div class="site-icon">📦</div>
-          <div class="site-name">Blink DS</div>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Delivered Work</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Client Projects</h2>
+    <p class="section-desc">Live platforms built and shipped for clients across aviation, logistics, fashion, trade, and
+      more.</p>
+
+    <div class="projects-grid" id="projects-grid">
+
+      <!-- Swift Jet Aviation -->
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-fallback">
+            <div class="site-icon">✈️</div>
+            <div class="site-name">Swift Jet Aviation</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
         </div>
-        <div class="project-thumb-overlay"></div>
+        <div class="project-body">
+          <div class="project-industry">Aviation · VIP Services</div>
+          <div class="project-title">Swift Jet Aviation</div>
+          <p class="project-desc">A premium private jet charter platform offering helicopter services, cargo logistics,
+            medevac support, and VIP terminal access. Built on WordPress with custom-developed plugins to handle
+            bookings, fleet listings, and service requests beyond what off-the-shelf plugins could support.</p>
+          <div class="project-tech">
+            <span class="tech-badge">WordPress</span>
+            <span class="tech-badge">Custom Plugins</span>
+            <span class="tech-badge">PHP</span>
+            <span class="tech-badge">MySQL</span>
+          </div>
+          <a href="https://swiftjetaviation.com/" target="_blank" rel="noopener" class="project-link">
+            Visit Site
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
       </div>
-      <div class="project-body">
-        <div class="project-industry">Logistics · Delivery SaaS</div>
-        <div class="project-title">Blink Delivery System</div>
-        <p class="project-desc">A scalable delivery management SaaS platform enabling businesses to track daily deliveries and optimize last-mile logistics. Backend engineered for high-throughput order processing and real-time status updates.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Node.js</span>
-          <span class="tech-badge">REST API</span>
-          <span class="tech-badge">PostgreSQL</span>
-          <span class="tech-badge">Vue.js</span>
+
+      <!-- Blink DS -->
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-fallback">
+            <div class="site-icon">📦</div>
+            <div class="site-name">Blink DS</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
         </div>
-        <a href="https://blinkds.com/" target="_blank" rel="noopener" class="project-link">
-          Visit Site
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        <div class="project-body">
+          <div class="project-industry">Logistics · Delivery SaaS</div>
+          <div class="project-title">Blink Delivery System</div>
+          <p class="project-desc">A delivery management platform enabling businesses to track daily deliveries and
+            streamline last-mile logistics. Built on WordPress with custom plugin development to power flexible tracking
+            and reporting features beyond standard theme functionality.</p>
+          <div class="project-tech">
+            <span class="tech-badge">WordPress</span>
+            <span class="tech-badge">Custom Plugins</span>
+            <span class="tech-badge">PHP</span>
+            <span class="tech-badge">MySQL</span>
+          </div>
+          <a href="https://blinkds.com/" target="_blank" rel="noopener" class="project-link">
+            Visit Site
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Ehab Group -->
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-fallback">
+            <div class="site-icon">🏢</div>
+            <div class="site-name">Ehab Group</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-industry">Enterprise · Corporate</div>
+          <div class="project-title">Ehab Group</div>
+          <p class="project-desc">A corporate enterprise website for a multi-division Egyptian holding group. Engineered
+            a robust CMS-backed backend with structured content management, SEO-optimized APIs, and a modular
+            architecture to support multiple business units.</p>
+          <div class="project-tech">
+            <span class="tech-badge">WordPress</span>
+            <span class="tech-badge">PHP</span>
+            <span class="tech-badge">MySQL</span>
+            <span class="tech-badge">CMS</span>
+          </div>
+          <a href="https://ehabgroup.com/" target="_blank" rel="noopener" class="project-link">
+            Visit Site
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Zayatco -->
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-fallback">
+            <div class="site-icon">🛒</div>
+            <div class="site-name">Zayatco</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-industry">E-commerce · Retail</div>
+          <div class="project-title">Zayatco</div>
+          <p class="project-desc">A full-featured e-commerce storefront with product catalog management, inventory
+            tracking, and order lifecycle management. Built on WordPress with custom plugin work to extend catalog and
+            order-handling capabilities.</p>
+          <div class="project-tech">
+            <span class="tech-badge">WordPress</span>
+            <span class="tech-badge">Custom Plugins</span>
+            <span class="tech-badge">PHP</span>
+            <span class="tech-badge">MySQL</span>
+          </div>
+          <a href="https://zayatco.com/" target="_blank" rel="noopener" class="project-link">
+            Visit Site
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Crossed Women Wear -->
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-fallback">
+            <div class="site-icon">👗</div>
+            <div class="site-name">Crossed Women Wear</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-industry">Fashion · E-commerce</div>
+          <div class="project-title">Crossed Women Wear</div>
+          <p class="project-desc">A fashion e-commerce storefront for a women's clothing brand. Delivered a full backend
+            with product variants, size management, cart and checkout flows, and integrated payment processing with
+            secure order fulfillment APIs.</p>
+          <div class="project-tech">
+            <span class="tech-badge">WooCommerce</span>
+            <span class="tech-badge">PHP</span>
+            <span class="tech-badge">MySQL</span>
+            <span class="tech-badge">Payment API</span>
+          </div>
+          <a href="https://crossedwomenwear.com/" target="_blank" rel="noopener" class="project-link">
+            Visit Site
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Golden Pharaoh -->
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-fallback">
+            <div class="site-icon">🏺</div>
+            <div class="site-name">Golden Pharaoh Egypt</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-industry">Trade · Export</div>
+          <div class="project-title">Golden Pharaoh Egypt</div>
+          <p class="project-desc">A bilingual (Arabic/English) B2B trade and export platform showcasing Egyptian goods
+            for international markets. Built a Node.js/Express backend with localized content APIs, a product directory,
+            and an inquiry management system.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Node.js</span>
+            <span class="tech-badge">Express</span>
+            <span class="tech-badge">i18n / Multilingual</span>
+            <span class="tech-badge">REST API</span>
+          </div>
+          <a href="https://www.goldenpharaohegypt.com/en" target="_blank" rel="noopener" class="project-link">
+            Visit Site
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Movers Agency -->
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-fallback">
+            <div class="site-icon">📣</div>
+            <div class="site-name">Movers Agency</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-industry">Marketing · Agency</div>
+          <div class="project-title">Movers Agency</div>
+          <p class="project-desc">A marketing agency website built on WordPress, covering service listings, case
+            studies, and lead-capture forms — with custom plugin and theme work to match the agency's brand and content
+            needs.</p>
+          <div class="project-tech">
+            <span class="tech-badge">WordPress</span>
+            <span class="tech-badge">Custom Plugins</span>
+            <span class="tech-badge">PHP</span>
+            <span class="tech-badge">MySQL</span>
+          </div>
+          <a href="https://moversagency.net/" target="_blank" rel="noopener" class="project-link">
+            Visit Site
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONFIDENTIAL PROJECTS -->
+  <section id="confidential" style="background: var(--navy-mid);">
+    <div class="section-label">Additional Work</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Confidential Projects</h2>
+    <p class="section-desc">A number of engagements are covered by client NDAs. Client names, brands, and links are
+      withheld — scope and stack are shared below.</p>
+
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-fallback">
+            <div class="site-icon">🔒</div>
+            <div class="site-name">NDA Protected</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-industry">E-commerce · Confidential Client</div>
+          <div class="project-title">Multi-Vendor E-commerce Platform</div>
+          <p class="project-desc">Backend for a multi-vendor marketplace supporting independent seller storefronts,
+            product catalogs, order routing, and commission handling across vendors.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Laravel</span>
+            <span class="tech-badge">MySQL</span>
+            <span class="tech-badge">REST API</span>
+          </div>
+          <span class="project-link" style="color: var(--muted); cursor: default;">
+            Under NDA
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="project-card flagship">
+        <div class="project-thumb">
+          <div class="txn-widget">
+            <div class="txn-row">
+              <div class="txn-gateway"><span class="txn-dot"></span>Bank Transfer</div>
+              <div class="txn-amount">EGP 12,450</div>
+            </div>
+            <div class="txn-row">
+              <div class="txn-gateway"><span class="txn-dot"></span>Mobile Wallet</div>
+              <div class="txn-amount">EGP 3,200</div>
+            </div>
+            <div class="txn-row">
+              <div class="txn-gateway"><span class="txn-dot"></span>Card Payment</div>
+              <div class="txn-amount">EGP 850</div>
+            </div>
+            <div class="txn-row">
+              <div class="txn-gateway"><span class="txn-dot"></span>Cash Collection</div>
+              <div class="txn-amount">EGP 5,600</div>
+            </div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-industry">Fintech · Multi-Gateway Integration</div>
+          <div class="project-title">Payment Gateway Integration Dashboard</div>
+          <p class="project-desc">A Laravel-powered payments dashboard unifying multiple payment providers into a single
+            transaction view. Handles routing, reconciliation, retry logic, and real-time settlement tracking across
+            providers — client and provider names withheld under NDA.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Laravel</span>
+            <span class="tech-badge">MySQL</span>
+            <span class="tech-badge">Multi-Gateway</span>
+            <span class="tech-badge">REST API</span>
+          </div>
+          <span class="project-link" style="color: var(--muted); cursor: default;">
+            Under NDA
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-fallback">
+            <div class="site-icon">🔒</div>
+            <div class="site-name">NDA Protected</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-industry">Operations · Confidential Client</div>
+          <div class="project-title">Inventory Management System</div>
+          <p class="project-desc">A stock-tracking system with a Node.js/Express core and a Laravel + Filament admin
+            dashboard for inbound/outbound movements, low-stock alerts, and warehouse-level reporting, integrated with
+            the client's existing order system.</p>
+          <div class="project-tech">
+            <span class="tech-badge">Node.js / Express</span>
+            <span class="tech-badge">Laravel Filament</span>
+            <span class="tech-badge">MySQL</span>
+          </div>
+          <span class="project-link" style="color: var(--muted); cursor: default;">
+            Under NDA
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <div class="project-thumb-fallback">
+            <div class="site-icon">🔒</div>
+            <div class="site-name">NDA Protected</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-industry">Publishing · Confidential Client</div>
+          <div class="project-title">CMS-Based Blog Platform</div>
+          <p class="project-desc">Custom content management backend for a multi-author blog, with role-based publishing
+            permissions, draft/review workflows, and a structured content API.</p>
+          <div class="project-tech">
+            <span class="tech-badge">WordPress</span>
+            <span class="tech-badge">PHP</span>
+            <span class="tech-badge">MySQL</span>
+          </div>
+          <span class="project-link" style="color: var(--muted); cursor: default;">
+            Under NDA
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Career Path</div>
+    <div class="divider"></div>
+    <h2 class="section-title">Experience</h2>
+    <p class="section-desc">From freelance client work to enterprise banking systems — a consistent thread of building
+      things that scale.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2025 – Present</div>
+        <div class="timeline-role">Full Stack Developer</div>
+        <div class="timeline-company">Banque Misr — New Cairo</div>
+        <ul class="timeline-bullets">
+          <li>Building enterprise-grade banking applications for one of Egypt's largest banks</li>
+          <li>Developing secure APIs and backend services at scale</li>
+          <li>Integrating Vue.js frontends with Java Spring Boot backend systems</li>
+          <li>Contributing to microservices architecture and performance optimization</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2024 – 2025</div>
+        <div class="timeline-role">Mid-Senior Backend Developer</div>
+        <div class="timeline-company">Shahm4Tech</div>
+        <ul class="timeline-bullets">
+          <li>Designed end-to-end backend systems for multiple client products</li>
+          <li>Built RESTful APIs and implemented complex business logic</li>
+          <li>Optimized database performance across PostgreSQL and MySQL</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2024 – 2025</div>
+        <div class="timeline-role">Freelance Backend Developer</div>
+        <div class="timeline-company">Independent</div>
+        <ul class="timeline-bullets">
+          <li>Delivered inventory systems, payment gateway integrations, and e-commerce platforms</li>
+          <li>Designed scalable backend architectures for diverse client industries</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2022 – 2024</div>
+        <div class="timeline-role">Backend Developer</div>
+        <div class="timeline-company">Line Group</div>
+        <ul class="timeline-bullets">
+          <li>Developed backend systems using Laravel for production client projects</li>
+          <li>Built APIs and managed MySQL databases</li>
+          <li>Worked on WordPress customizations and bespoke backend logic</li>
+        </ul>
       </div>
     </div>
+  </section>
 
-    <!-- Ehab Group -->
-    <div class="project-card">
-      <div class="project-thumb">
-        <div class="project-thumb-fallback">
-          <div class="site-icon">🏢</div>
-          <div class="site-name">Ehab Group</div>
-        </div>
-        <div class="project-thumb-overlay"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-industry">Enterprise · Corporate</div>
-        <div class="project-title">Ehab Group</div>
-        <p class="project-desc">A corporate enterprise website for a multi-division Egyptian holding group. Engineered a robust CMS-backed backend with structured content management, SEO-optimized APIs, and a modular architecture to support multiple business units.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Laravel</span>
-          <span class="tech-badge">MySQL</span>
-          <span class="tech-badge">CMS</span>
-          <span class="tech-badge">PHP</span>
-        </div>
-        <a href="https://ehabgroup.com/" target="_blank" rel="noopener" class="project-link">
-          Visit Site
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Let's Talk</div>
+    <div class="divider" style="margin: 0 auto 1.5rem;"></div>
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-desc">Open to new opportunities, collaborations, and backend engineering challenges. Reach out
+      directly.</p>
+    <a href="mailto:abmansour707@gmail.com" class="btn-primary"
+      style="display:inline-block; margin-bottom: 1rem;">abmansour707@gmail.com</a>
+    <div class="contact-info">
+      <a href="tel:+201068809428" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" />
+        </svg>
+        +20 106 880 9428
+      </a>
+      <a href="https://github.com/abMans0ur" target="_blank" rel="noopener" class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+        </svg>
+        github.com/abMans0ur
+      </a>
+      <span class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+        Giza, Egypt
+      </span>
+      <a href="https://wa.me/201068809428" target="_blank" rel="noopener" class="contact-item"
+        style="text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;color:var(--gold);">
+          <path
+            d="M17.6 6.32A8.86 8.86 0 0012.05 4a8.94 8.94 0 00-7.74 13.4L3 21l3.7-1.28a8.93 8.93 0 004.32 1.1h.01A8.94 8.94 0 0020.94 12a8.86 8.86 0 00-3.34-5.68zM12.06 19.4a7.43 7.43 0 01-3.79-1.04l-.27-.16-2.82.98.95-2.75-.18-.28a7.45 7.45 0 1113.78-3.94 7.45 7.45 0 01-7.67 7.19zm4.08-5.58c-.22-.11-1.32-.65-1.53-.73-.2-.08-.35-.11-.5.11-.15.22-.57.73-.7.88-.13.15-.26.16-.48.05-.22-.11-.93-.34-1.78-1.1-.66-.59-1.1-1.31-1.23-1.53-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.39-.06-.11-.5-1.2-.68-1.65-.18-.43-.36-.37-.5-.38h-.43c-.15 0-.39.06-.59.28-.2.22-.78.76-.78 1.85s.8 2.15.91 2.3c.11.15 1.57 2.4 3.81 3.36.53.23.95.37 1.27.47.53.17 1.02.15 1.4.09.43-.06 1.32-.54 1.5-1.06.19-.52.19-.96.13-1.06-.06-.1-.2-.15-.42-.26z" />
+        </svg>
+        Whatsapp
+      </a>
     </div>
+  </section>
 
-    <!-- Zayatco -->
-    <div class="project-card">
-      <div class="project-thumb">
-        <div class="project-thumb-fallback">
-          <div class="site-icon">🛒</div>
-          <div class="site-name">Zayatco</div>
-        </div>
-        <div class="project-thumb-overlay"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-industry">E-commerce · Retail</div>
-        <div class="project-title">Zayatco</div>
-        <p class="project-desc">A full-featured e-commerce platform with product catalog management, secure payment gateway integration, inventory tracking, and order lifecycle management. Built to handle scale with optimized database queries and caching layers.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Laravel</span>
-          <span class="tech-badge">Payment Gateway</span>
-          <span class="tech-badge">MySQL</span>
-          <span class="tech-badge">REST API</span>
-        </div>
-        <a href="https://zayatco.com/" target="_blank" rel="noopener" class="project-link">
-          Visit Site
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
+  <!-- FOOTER -->
+  <footer>
+    <p>© <span id="year">2025</span> <span>Abdelrahman Mansour</span>. All rights reserved.</p>
+    <div style="display:flex; align-items:center; gap:1.5rem;">
+      <p>Backend Engineer · <span>Cairo, Egypt</span></p>
     </div>
+  </footer>
 
-    <!-- Crossed Women Wear -->
-    <div class="project-card">
-      <div class="project-thumb">
-        <div class="project-thumb-fallback">
-          <div class="site-icon">👗</div>
-          <div class="site-name">Crossed Women Wear</div>
-        </div>
-        <div class="project-thumb-overlay"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-industry">Fashion · E-commerce</div>
-        <div class="project-title">Crossed Women Wear</div>
-        <p class="project-desc">A fashion e-commerce storefront for a women's clothing brand. Delivered a full backend with product variants, size management, cart and checkout flows, and integrated payment processing with secure order fulfillment APIs.</p>
-        <div class="project-tech">
-          <span class="tech-badge">WooCommerce</span>
-          <span class="tech-badge">PHP</span>
-          <span class="tech-badge">MySQL</span>
-          <span class="tech-badge">Payment API</span>
-        </div>
-        <a href="https://crossedwomenwear.com/" target="_blank" rel="noopener" class="project-link">
-          Visit Site
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
+  <script>
+    // ── Scroll reveal: stagger-animate cards as they enter view ──
+    (function () {
+      const groups = [
+        document.querySelectorAll('.skill-card'),
+        document.querySelectorAll('.project-card'),
+        document.querySelectorAll('.timeline-item')
+      ];
+      groups.forEach(group => {
+        group.forEach((el, i) => {
+          el.classList.add('reveal');
+          el.style.transitionDelay = Math.min(i * 0.08, 0.4) + 's';
+        });
+      });
 
-    <!-- Golden Pharaoh -->
-    <div class="project-card">
-      <div class="project-thumb">
-        <div class="project-thumb-fallback">
-          <div class="site-icon">🏺</div>
-          <div class="site-name">Golden Pharaoh Egypt</div>
-        </div>
-        <div class="project-thumb-overlay"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-industry">Trade · Export</div>
-        <div class="project-title">Golden Pharaoh Egypt</div>
-        <p class="project-desc">A bilingual (Arabic/English) B2B trade and export platform showcasing Egyptian goods for international markets. Architected a multilingual backend with localized content APIs, product directory, and inquiry management system.</p>
-        <div class="project-tech">
-          <span class="tech-badge">Laravel</span>
-          <span class="tech-badge">i18n / Multilingual</span>
-          <span class="tech-badge">MySQL</span>
-          <span class="tech-badge">REST API</span>
-        </div>
-        <a href="https://www.goldenpharaohegypt.com/en" target="_blank" rel="noopener" class="project-link">
-          Visit Site
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
-    <!-- Movers Agency -->
-    <div class="project-card">
-      <div class="project-thumb">
-        <div class="project-thumb-fallback">
-          <div class="site-icon">🚚</div>
-          <div class="site-name">Movers Agency</div>
-        </div>
-        <div class="project-thumb-overlay"></div>
-      </div>
-      <div class="project-body">
-        <div class="project-industry">Relocation · Services</div>
-        <div class="project-title">Movers Agency</div>
-        <p class="project-desc">A service platform for a professional relocation and moving company. Developed backend systems for service request handling, quote generation, scheduling, and client communication — fully integrated with the frontend booking flow.</p>
-        <div class="project-tech">
-          <span class="tech-badge">PHP / Laravel</span>
-          <span class="tech-badge">REST API</span>
-          <span class="tech-badge">MySQL</span>
-          <span class="tech-badge">WordPress</span>
-        </div>
-        <a href="https://moversagency.net/" target="_blank" rel="noopener" class="project-link">
-          Visit Site
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-label">Career Path</div>
-  <div class="divider"></div>
-  <h2 class="section-title">Experience</h2>
-  <p class="section-desc">From freelance client work to enterprise banking systems — a consistent thread of building things that scale.</p>
-
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">2025 – Present</div>
-      <div class="timeline-role">Full Stack Developer</div>
-      <div class="timeline-company">Banque Misr — New Cairo</div>
-      <ul class="timeline-bullets">
-        <li>Building enterprise-grade banking applications for one of Egypt's largest banks</li>
-        <li>Developing secure APIs and backend services at scale</li>
-        <li>Integrating Vue.js frontends with Java Spring Boot backend systems</li>
-        <li>Contributing to microservices architecture and performance optimization</li>
-      </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">2024 – 2025</div>
-      <div class="timeline-role">Mid-Senior Backend Developer</div>
-      <div class="timeline-company">Shahm4Tech</div>
-      <ul class="timeline-bullets">
-        <li>Designed end-to-end backend systems for multiple client products</li>
-        <li>Built RESTful APIs and implemented complex business logic</li>
-        <li>Optimized database performance across PostgreSQL and MySQL</li>
-      </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">2024 – 2025</div>
-      <div class="timeline-role">Freelance Backend Developer</div>
-      <div class="timeline-company">Independent</div>
-      <ul class="timeline-bullets">
-        <li>Delivered inventory systems, payment gateway integrations, and e-commerce platforms</li>
-        <li>Designed scalable backend architectures for diverse client industries</li>
-      </ul>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">2022 – 2024</div>
-      <div class="timeline-role">Backend Developer</div>
-      <div class="timeline-company">Line Group</div>
-      <ul class="timeline-bullets">
-        <li>Developed backend systems using Laravel for production client projects</li>
-        <li>Built APIs and managed MySQL databases</li>
-        <li>Worked on WordPress customizations and bespoke backend logic</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-label">Let's Talk</div>
-  <div class="divider" style="margin: 0 auto 1.5rem;"></div>
-  <h2 class="section-title">Get in Touch</h2>
-  <p class="section-desc">Open to new opportunities, collaborations, and backend engineering challenges. Reach out directly.</p>
-  <a href="mailto:abmansour707@gmail.com" class="btn-primary" style="display:inline-block; margin-bottom: 1rem;">abmansour707@gmail.com</a>
-  <div class="contact-info">
-    <a href="tel:+201068809428" class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
-      +20 106 880 9428
-    </a>
-    <a href="https://github.com/abMans0ur" target="_blank" rel="noopener" class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-      github.com/abMans0ur
-    </a>
-    <span class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      Giza, Egypt
-    </span>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2025 <span>Abdelrahman Mansour</span>. All rights reserved.</p>
-  <p>Backend Engineer · <span>Giza, Egypt</span></p>
-</footer>
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    })();
+    const yearSpan = document.getElementById('year');
+    const currentYear = new Date().getFullYear();
+    if (yearSpan) {
+      yearSpan.textContent = currentYear;
+    }
+  </script>
 
 </body>
+
 </html>
